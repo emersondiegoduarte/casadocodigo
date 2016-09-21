@@ -1,19 +1,11 @@
 
+var connectionFactory = require('../infra/connectionFactory');
 module.exports = function(app){
 	app.get("/produtos",function(req,res){
 		  //res.render("produtos/lista");
-		  var postgresql  = require("pg");
-		  var config = {
-			  user: 'postgres', //env var: PGUSER
-			  database: 'casadocodigo_nodejs', //env var: PGDATABASE
-			  password: 'root', //env var: PGPASSWORD
-			  host: 'localhost', // Server hosting the postgres database
-			  port: 5432, //env var: PGPORT
-			  max: 20, // max number of clients in the pool
-			  idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
-			};
-		  var client = new postgresql.Client(config);
-		  client.connect(function (err) {
+		  			
+		var client = connectionFactory();
+		client.connect(function (err) {
 		  if (err) throw err;
 
 		  // execute a query on our database
