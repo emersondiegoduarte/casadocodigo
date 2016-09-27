@@ -15,7 +15,7 @@ function createDbConnection(){
 			  host: 'localhost', // Server hosting the postgres database
 			  port: 5432, //env var: PGPORT
 			  max: 20, // max number of clients in the pool
-			  idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
+			  idleTimeoutMillis: 60000, // how long a client is allowed to remain idle before being closed
 			};
 	return new postgres.Client(config);
 }
