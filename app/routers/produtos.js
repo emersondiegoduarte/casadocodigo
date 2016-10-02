@@ -4,10 +4,16 @@ module.exports = function(app){
         client.connect();
         var produtosDAO = new app.infra.ProdutosDAO(client);
         produtosDAO.lista(function (err, result){
+        	res.format({
+        		html: function(){
+					res.render("produtos/lista",{lista:result});
+        		},
+        		json : function(){
+        			res.json(result);
+        		}
+        	});
         	client.end();
-            res.render("produtos/lista",{lista:result});
-         });
-        
+        }); 
     });
 
     app.get("/produtos/form",function(req,res){

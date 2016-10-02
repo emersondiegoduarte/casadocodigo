@@ -8,6 +8,7 @@ module.exports = function configura(){
 	app.set("views", "./app/views");
 
 	app.use(bodyParser.urlencoded({extended: true}));
+	app.use(bodyParser.json());
 
 	load('routers', {cwd : 'app'})
 	.then('infra')
