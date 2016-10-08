@@ -19,7 +19,7 @@ var client = http.request(configuracoes,function(res){
  
 
 var produto = {
-	titulo : 'mais sobre node',
+	titulo : '',
 	descricao: 'mais um livro de node js para estudantes',
 	preco : 39.90
 }

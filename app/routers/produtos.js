@@ -17,7 +17,7 @@ module.exports = function(app){
     });
 
     app.get("/produtos/form",function(req,res){
-        res.render("produtos/form");
+        res.render("produtos/form",{errosValidacao:{} , produto:{}});
     });
 
     app.post("/produtos",function(req,res){
@@ -25,10 +25,22 @@ module.exports = function(app){
         client.connect();
         var produtosDAO = new app.infra.ProdutosDAO(client);
         var produto = req.body;
-        console.log(produto);
+        req.assert('titulo','Titulo obrigatório').notEmpty();
+        req.assert('preco', 'Formato de preço inválido').isFloat();
+        var errors = req.validationErrors();
+        if(errors){
+            res.format({
+               html: function(){
+                    res.status(400).render("produtos/form",{validationErrors:errors,produto:produto});
+                },
+                json: function(){
+                    res.status(400).send(errors);
+                }
+            });       	
+        }
         produtosDAO.salvar(produto,function (err){
         	if(err)
-        		res.render("<h1>Erro ao execurar a query</h1>");
+        		console.log(err);
         	client.end();
             res.redirect("produtos");
          });
