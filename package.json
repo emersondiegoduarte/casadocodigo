@@ -18,6 +18,7 @@
     "express-load": "^1.1.15",
     "express-validator": "^2.20.10",
     "pg": "^6.1.0",
-    "postgresql": "0.0.1"
+    "postgresql": "0.0.1",
+    "socket.io": "^1.5.0"
   }
 }
